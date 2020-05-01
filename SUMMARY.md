@@ -33,4 +33,9 @@
   * [性能优化](react/optimizing-performance.md)
 * [git](git.md)
 * [DNS](dns.md)
+* [设备像素与设备独立像素](pixel.md)
+* [JavaScript 知识点](javascript.md)
+* [mpvue源码阅读](mpvue.md)
+* [Source maps](source-maps.md)
+* [Vue源码解析](vue.md)
 
