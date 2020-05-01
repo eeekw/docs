@@ -1,9 +1,5 @@
 # Vue Loader
 
-## Vue Loader
-
-Created: Feb 10, 2020 10:11 PM
-
 ## Webpack配置
 
 ```jsx

@@ -1,4 +1,4 @@
-# contrast
+# contrast\(\)
 
 调整输入图像的对比度
 
