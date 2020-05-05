@@ -1,8 +1,8 @@
-# 跨域资源共享(CORS)
+# 跨域资源共享\(CORS\)
 
 ## 概念
 
-**跨域资源共享**(CORS) 是一种机制：使用额外的HTTP头来告诉浏览器允许web应用访问不同源的资源。当web应用请求一个不同源 (domain, protocol, or port) 的资源时，会发起一个跨域 HTTP 请求。
+**跨域资源共享**\(CORS\) 是一种机制：使用额外的HTTP头来告诉浏览器允许web应用访问不同源的资源。当web应用请求一个不同源 \(domain, protocol, or port\) 的资源时，会发起一个跨域 HTTP 请求。
 
 > 跨域请求的示例，来自`https://domain-a.com`的前端js代码使用`XMLHttpRequest`发起`https://domain-b.com/data.json`的请求
 
@@ -37,20 +37,20 @@
 
 ### 示例
 
-```js
+```javascript
 const xhr = new XMLHttpRequest();
 const url = 'https://bar.other/resources/public-data/';
-   
+
 xhr.open('GET', url);
 xhr.onreadystatechange = someHandler;
-xhr.send(); 
+xhr.send();
 ```
 
-![img](https://mdn.mozillademos.org/files/17214/simple-req-updated.png)
+![Simple requests](https://mdn.mozillademos.org/files/17214/simple-req-updated.png)
 
 请求报文/响应报文
 
-```
+```text
 GET /resources/public-data/ HTTP/1.1
 Host: bar.other
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0
@@ -61,7 +61,7 @@ Connection: keep-alive
 Origin: https://foo.example
 ```
 
-```
+```text
 HTTP/1.1 200 OK
 Date: Mon, 01 Dec 2008 00:23:53 GMT
 Server: Apache/2
@@ -82,7 +82,7 @@ Content-Type: application/xml
 
 ### 示例
 
-```js
+```javascript
 const xhr = new XMLHttpRequest();
 xhr.open('POST', 'https://bar.other/resources/post-here/');
 xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
@@ -91,13 +91,13 @@ xhr.onreadystatechange = handler;
 xhr.send('<person><name>Arun</name></person>');
 ```
 
-![img](https://mdn.mozillademos.org/files/16753/preflight_correct.png)
+![Preflighted requests](https://mdn.mozillademos.org/files/16753/preflight_correct.png)
 
-> 注意：如下所述，实际 POST 请求不包括`Access-Control-Request-* `headers;它们仅在OPTIONS 请求时需要。
+> 注意：如下所述，实际 POST 请求不包括`Access-Control-Request-*`headers;它们仅在OPTIONS 请求时需要。
 
 预检请求
 
-```
+```text
 OPTIONS /resources/post-here/ HTTP/1.1
 Host: bar.other
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0
@@ -124,7 +124,7 @@ Connection: Keep-Alive
 
 预检请求完成之后，发送实际请求
 
-```
+```text
 POST /resources/post-here/ HTTP/1.1
 Host: bar.other
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:71.0) Gecko/20100101 Firefox/71.0

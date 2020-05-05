@@ -38,4 +38,5 @@
 * [mpvue源码阅读](mpvue.md)
 * [Source maps](source-maps.md)
 * [Vue源码解析](vue.md)
-* [跨域资源共享(CORS)](跨域资源共享.md)
+* [跨域资源共享\(CORS\)](kua-yu-zi-yuan-gong-xiang.md)
+
