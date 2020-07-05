@@ -15,6 +15,10 @@ git diff --staged
 git rm --cached README
 ### 重命名文件
 git mv file_from file_to
+### 清除暂存区
+git reset HEAD <file>
+### 丢弃更改
+git checkout -- <file>
 ```
 
 ## git commit
@@ -25,7 +29,7 @@ git mv file_from file_to
 
 ```text
 ### 显示每次提交的差异
-git log -p (-2)
+git log -p -2
 ### 显示每次提交的统计信息
 git log --stat
 ### 一行显示
@@ -34,9 +38,21 @@ git log --pretty=oneline
 git log --pretty=format:"%h - %an, %ar : %s"
 ### 显示合并记录
 git log --graph
+### 显示最近提交的n个commit
+git log -<n>
+### 显示指定日期后的commit
+git log --since,--after
+### 显示指定日期前的commit
+git log --until,--before
+### 显示指定作者的提交
+git log --author
+### 显示指定commit message包含的string的提交
+git log --grep
+### 显示指定代码的提交
+git log -s
 ```
 
-
+ 用于`git log --pretty=format`的格式指定
 
 | Specifier | Description of Output |
 | :--- | :--- |
