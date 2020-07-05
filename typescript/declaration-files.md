@@ -1,21 +1,21 @@
-# 声明文件
+# declaration-files
 
 ## 语法
 
-- `declare var` 声明全局变量
-- `declare function` 声明全局方法
-- `declare class` 声明全局类
-- `declare enum` 声明全局枚举类型
-- `declare namespace` 声明（含有子属性的）全局对象
-- `interface` 和 `type` 声明全局类型
-- `export` 导出变量
-- `export namespace` 导出（含有子属性的）对象
-- `export default` ES6 默认导出
-- `export =` commonjs 导出模块
-- `export as namespace` UMD 库声明全局变量
-- `declare global` 扩展全局变量
-- `declare module` 扩展模块
-- `/// <reference /> ` 三斜线指令
+* `declare var` 声明全局变量
+* `declare function` 声明全局方法
+* `declare class` 声明全局类
+* `declare enum` 声明全局枚举类型
+* `declare namespace` 声明（含有子属性的）全局对象
+* `interface` 和 `type` 声明全局类型
+* `export` 导出变量
+* `export namespace` 导出（含有子属性的）对象
+* `export default` ES6 默认导出
+* `export =` commonjs 导出模块
+* `export as namespace` UMD 库声明全局变量
+* `declare global` 扩展全局变量
+* `declare module` 扩展模块
+* `/// <reference />` 三斜线指令
 
 ## `declare module`
 
@@ -50,17 +50,15 @@ import * as URL from "url";
 let myUrl = URL.parse("http://www.typescriptlang.org");
 ```
 
-## `/// <reference /> `
+## `/// <reference />`
 
 只有单行或多行注释包括其它三斜线指令可以在三斜线指令之前
 
-##### `/// <reference path="..."> `
+#### `/// <reference path="...">`
 
 声明对另一个文件的依赖
 
-
-
-##### `/// <reference types="..."> `
+#### `/// <reference types="...">`
 
 声明对另一个库的依赖，类似于声明文件中的 `import`
 
@@ -73,7 +71,7 @@ let myUrl = URL.parse("http://www.typescriptlang.org");
 > * 当我们在**书写**一个全局变量的声明文件时
 > * 当我们需要**依赖**一个全局变量的声明文件时
 
-##### 当我们在**书写**一个全局变量的声明文件时
+#### 当我们在**书写**一个全局变量的声明文件时
 
 在全局变量的声明文件中，是不允许出现 `import`, `export` 关键字的。一旦出现了，那么他就会被视为一个 npm 包或 UMD 库，就不再是全局变量的声明文件了。故当我们在书写一个全局变量的声明文件时，如果需要引用另一个库的类型，那么就必须用三斜线指令了
 
@@ -88,7 +86,7 @@ declare function foo(options: JQuery.AjaxSettings): string;
 foo({});
 ```
 
-##### **依赖**一个全局变量的声明文件
+#### **依赖**一个全局变量的声明文件
 
 当我们需要依赖一个全局变量的声明文件时，由于全局变量不支持通过 `import` 导入，当然也就必须使用三斜线指令来引入了
 
@@ -105,7 +103,7 @@ import { foo } from 'node-plugin';
 foo(global.process);
 ```
 
-https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html
+[https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
 
 ## 自动生成声明文件
 
@@ -113,7 +111,7 @@ https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html
 
 我们可以在命令行中添加 `--declaration`（简写 `-d`），或者在 `tsconfig.json` 中添加 `declaration` 选项。这里以 `tsconfig.json` 为例：
 
-```json
+```javascript
 {
     "compilerOptions": {
         "module": "commonjs",
@@ -127,7 +125,7 @@ https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html
 
 运行 `tsc` 之后，目录结构如下：
 
-```
+```text
 /path/to/project
 ├── lib
 |  ├── bar
@@ -158,7 +156,7 @@ https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html
 
 若声明文件命名为`index.d.ts`，可不指定`types`或`typings`属性
 
-```json
+```javascript
 {
   "name": "awesome",
   "author": "Vandelay Industries",
@@ -170,7 +168,7 @@ https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html
 
 所有依赖包的声明文件需要在`dependencies`指定
 
-```json
+```javascript
 {
   "name": "browserify-typescript-extension",
   "author": "Vandelay Industries",
@@ -189,14 +187,14 @@ https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html
 
 不要使用
 
-```typescript 
+```typescript
 /// <reference path="../typescript/lib/typescriptServices.d.ts" />
 ....
 ```
 
 推荐使用
 
-```typescript 
+```typescript
 /// <reference types="typescript" />
 ....
 ```
