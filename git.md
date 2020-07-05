@@ -7,6 +7,8 @@
 git remote add origin <url>
 ### 克隆指定分支
 git clone -b <branch> <repo>
+### 克隆时截取历史commit为指定个数
+git clone <repo> --depth 1
 ### 创建空分支
 git checkout --orphan <branch>
 ### 暂存区与上次commit比较
