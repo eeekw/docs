@@ -29,7 +29,7 @@ git checkout -- <file>
 
 ## [git log](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History)
 
-```text
+```bash
 ### 显示每次提交的差异
 git log -p -2
 ### 显示每次提交的统计信息
