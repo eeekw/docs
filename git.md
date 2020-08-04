@@ -19,6 +19,10 @@ git rm --cached README
 git mv file_from file_to
 ### 清除暂存区
 git reset HEAD <file>
+### 取消暂存
+git restore --staged <file>
+### 取消更改
+git restore　<file>
 ### 丢弃更改
 git checkout -- <file>
 ```
