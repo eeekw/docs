@@ -38,7 +38,7 @@
 * [mpvue源码阅读](mpvue.md)
 * [Source maps](source-maps.md)
 * [Vue](vue/README.md)
-  * [vue源码解析](vue/Vue源码解析.md)
+  * [vue源码解析](vue/source-code.md)
 * [跨域资源共享\(CORS\)](cors.md)
 * [typescript](typescript/README.md)
   * [declaration-files](typescript/declaration-files.md)

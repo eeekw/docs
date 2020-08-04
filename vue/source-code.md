@@ -569,9 +569,46 @@ export function initState (vm: Component) {
   } else {
     observe(vm._data = {}, true /* asRootData */)
   }
-  if (opts.computed) initComputed(vm, opts.computed) // 给第一个computed属性创建一个watcher，并记录依赖了那么property，当依赖的property更新时，computed返回新的值
+  if (opts.computed) initComputed(vm, opts.computed) // 与props和data不同，每个computed都有一个watcher，记录依赖的data,props的property。当依赖的property更新时，computed返回新的值。在渲染期间，把需要的computed的这些依赖同时记录为用于重新渲染的watcher的依赖
   if (opts.watch && opts.watch !== nativeWatch) {
-    initWatch(vm, opts.watch) // 与computed类似，比computed多提供了一个回调，更新时会调用
+    initWatch(vm, opts.watch) // 每个watch都有一个watcher，记录依赖的data,props的property。当依赖的property更新时，watch返回新的值，并调用回调。
+  }
+}
+
+function initComputed (vm: Component, computed: Object) {
+  // $flow-disable-line
+  const watchers = vm._computedWatchers = Object.create(null)
+  // computed properties are just getters during SSR
+  const isSSR = isServerRendering()
+
+  for (const key in computed) {
+    const userDef = computed[key]
+    const getter = typeof userDef === 'function' ? userDef : userDef.get
+
+    if (!isSSR) {
+      // 给每一个computed属性创建一个watcher，并记录依赖的property，当依赖的property更新时，computed返回新的值
+      watchers[key] = new Watcher(
+        vm,
+        getter || noop,
+        noop,
+        computedWatcherOptions
+      )
+    }
+  }
+}
+// computed的getter方法
+function createComputedGetter (key) {
+  return function computedGetter () {
+    const watcher = this._computedWatchers && this._computedWatchers[key]
+    if (watcher) {
+      if (watcher.dirty) {
+        watcher.evaluate()
+      }
+      if (Dep.target) {
+        watcher.depend() // 在渲染期间，把需要的computed的这些依赖同时记录为用于重新渲染的watcher的依赖
+      }
+      return watcher.value
+    }
   }
 }
 ```
