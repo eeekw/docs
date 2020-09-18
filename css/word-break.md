@@ -38,5 +38,5 @@ CJK：中文、日文、韩文
   * 任何保留的空格之后都有换行的机会，包括空格之间
   * 保留的空格占用空间，且不会挂起，因此影响盒子内在大小
 
-![](../.gitbook/assets/snipaste_2020-05-01_16-53-22.png)
+![](../.gitbook/assets/css-wordbreak.png)
 

@@ -2,7 +2,7 @@
 
 ## matrix\(\)
 
-![matrix/Untitled.png](.gitbook/assets/untitled.png)
+![matrix/Untitled.png](./.gitbook/assets/matrix.png)
 
 ## 求转换矩阵
 

@@ -1,4 +1,4 @@
 # 性能优化
 
-![Untitled/Untitled.png](../.gitbook/assets/untitled%20%282%29.png)
+![Untitled/Untitled.png](../.gitbook/assets/react-optimizing.png)
 
