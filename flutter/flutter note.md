@@ -44,3 +44,53 @@ static TextStyle lerp(TextStyle a, TextStyle b, double t) {
 ### Theme.headline6
 
 用于`Appbar.title`
+
+### TextField中文输入时出现额外字符
+
+通过升级flutter解决(1.20.1)
+
+### 在iPhone上运行执行请求会卡住页面
+
+https://www.jianshu.com/p/f05749744d19
+
+https://github.com/dart-lang/sdk/issues/41519
+
+https://github.com/flutterchina/dio/issues/786
+
+暂时解决方案：翻墙
+
+### 在iOS13.3.1上运行报错
+
+`code signature invalid for "path/to/Flutter.framework/Flutter"`
+
+https://github.com/flutter/flutter/issues/49504
+
+### android模拟器打不开
+
+磁盘空间不足，把模拟器移动到其它磁盘
+
+### flutter升级后运行失败
+
+执行`flutter create .`重新创建对应平台项目文件
+
+### 修改Android包名后运行失败
+
+需要同时修改其它几个文件的包名
+
+### android 请求需要打开网络权限
+
+### Google 授权登录在Android上报错
+
+和facebook库有冲突
+
+https://stackoverflow.com/questions/48360060/missingpluginexceptionno-implementation-found-for-method-init-on-channel-plugin
+
+### 在build阶段转换界面或setState会报以下错误（间接或直接调用setState或markNeedsBuild）
+
+解决：延时
+
+```
+[VERBOSE-2:ui_dart_state.cc(171)] Unhandled Exception: setState() or markNeedsBuild() called during build.
+This Overlay widget cannot be marked as needing to build because the framework is already in the process of building widgets.  A widget can be marked as needing to be built during the build phase only if one of its ancestors is currently building. This exception is allowed because the framework builds parent widgets before children, which means a dirty descendant will always be built. Otherwise, the framework might not visit this widget during this build phase.
+```
+

@@ -9,6 +9,18 @@ git remote add origin <url>
 git clone -b <branch> <repo>
 ### 克隆时截取历史commit为指定个数
 git clone <repo> --depth 1
+### 添加子模块
+git submodule add <repository> <path>
+### 克隆并拉取子模块
+git clone --recurse-submodules
+### 拉取子模块
+git submodule init
+git submodule update
+＝git submodule update --init
+### 拉取所有包括嵌套的子模块
+git submodule update --init --recursive
+### 出现fatal: refusing to merge unrelated histories错误时使用
+git pull origin master --allow-unrelated-histories
 ### 创建空分支
 git checkout --orphan <branch>
 ### 暂存区与上次commit比较
@@ -25,6 +37,16 @@ git restore --staged <file>
 git restore　<file>
 ### 丢弃更改
 git checkout -- <file>
+### 比较文件差异
+git diff [<options>] [<commit> [<commit>]] [--] [<path>...]
+### 显示指定提交的日志消息和文本差异
+git show [<options>] [<object>…]
+### 删除无用的远程跟踪分支
+git remote prune origin
+### 删除远程跟踪分支
+git branch -r -d origin/<branch>
+### 批量删除分支
+git branch |grep '分支过滤关键字' |xargs git branch -D
 ```
 
 ## git commit
@@ -77,6 +99,3 @@ git log -s
 | %cd | Committer date |
 | %cr | Committer date, relative |
 | %s | Subject |
-
-
-
