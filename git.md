@@ -9,16 +9,6 @@ git remote add origin <url>
 git clone -b <branch> <repo>
 ### 克隆时截取历史commit为指定个数
 git clone <repo> --depth 1
-### 添加子模块
-git submodule add <repository> <path>
-### 克隆并拉取子模块
-git clone --recurse-submodules
-### 拉取子模块
-git submodule init
-git submodule update
-＝git submodule update --init
-### 拉取所有包括嵌套的子模块
-git submodule update --init --recursive
 ### 出现fatal: refusing to merge unrelated histories错误时使用
 git pull origin master --allow-unrelated-histories
 ### 创建空分支
@@ -48,6 +38,27 @@ git branch -r -d origin/<branch>
 ### 批量删除分支
 git branch |grep '分支过滤关键字' |xargs git branch -D
 ```
+
+## 子模块
+
+```bash
+### 克隆并拉取子模块
+git clone --recurse-submodules
+### 添加子模块并拉取 
+git submodule add <repository> <path>
+### 子模块的目录被看作是某次提交
+### 被始化并拉取子模块的其次提交
+git submodule init ### 初始化本地配置文件
+git submodule update ### 拉取数据
+＝git submodule update --init
+### 拉取所有嵌套的子模块
+git submodule update --init --recursive
+### 子模块不会跟踪更改，需要手动合并
+### 合并上游分支到本地（默认master分支）
+git submodule update --remote
+```
+
+
 
 ## git commit
 
