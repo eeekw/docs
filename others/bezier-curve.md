@@ -22,7 +22,7 @@ $$P_0B_t ： P_0P_1 = t$$
 
 ### 一阶贝塞尔曲线
 
-![Untitled/0d32hcuk7z.gif](./.gitbook/assets/0d32hcuk7z.gif)
+![Untitled/0d32hcuk7z.gif](../.gitbook/assets/0d32hcuk7z.gif)
 
 $$(B_t - P_0) / (P_1 - P_0) = t$$
 
@@ -32,7 +32,7 @@ $$B_t = P_0 + (P_1 - P_0)t = (1 - t)P_0 + tP_1 (1)$$
 
 ### 二阶贝塞尔曲线
 
-![Untitled/54diwjdj8b.gif](./.gitbook/assets/54diwjdj8b.gif)
+![Untitled/54diwjdj8b.gif](../.gitbook/assets/54diwjdj8b.gif)
 
 $$B_a = P_0 + (P_1 - P_0)t = (1 - t)P_0 + tP_1 (2)$$
 
@@ -46,7 +46,7 @@ $$P_t = (1-t)P_a + tP_b = (1-t)[(1-t)P_0 + tP_1] + t[(1-t)P_1 + tP_2] = (1-t)^2P
 
 ### 三阶贝塞尔曲线
 
-![Untitled/mhmuin6c2w.gif](./.gitbook/assets/mhmuin6c2w.gif)
+![Untitled/mhmuin6c2w.gif](../.gitbook/assets/mhmuin6c2w.gif)
 
 同理，根据以上的推导过程可得
 
@@ -66,7 +66,7 @@ $$P_t = P_d + (P_e - P_d)t = (1 - t)P_d + tP_e = (1-t)[(1 - t)P_a + tP_b] + t[(1
 
 ### n阶贝塞尔曲线
 
-![Untitled/qygaf0ua9b.gif](./.gitbook/assets/qygaf0ua9b.gif)
+![Untitled/qygaf0ua9b.gif](../.gitbook/assets/qygaf0ua9b.gif)
 
-![Untitled/oczotc316x.gif](./.gitbook/assets/oczotc316x.gif)
+![Untitled/oczotc316x.gif](../.gitbook/assets/oczotc316x.gif)
 
