@@ -110,3 +110,11 @@ git log -s
 | %cd | Committer date |
 | %cr | Committer date, relative |
 | %s | Subject |
+
+### 批量操作
+```bash
+for file in *;  # 正则匹配路径
+  do  
+     echo $file is file path \! ;  #${file}代表的是文件的全路径
+  done
+```
