@@ -1,4 +1,6 @@
-# ES6
+# ecma262
+
+## ES2015
 
 class/module
 
@@ -12,10 +14,12 @@ let/const
 
 模板字符串
 
-扩展语法
+数组的扩展语法
 
 generator
 
 proxy
 
 string和array的新方法
+
+## ES2016
