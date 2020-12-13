@@ -63,7 +63,38 @@
 
 注：float和clear只会影响同一BFC中元素的布局。外边距折叠只会发生在属于同一BFC的块级元素之间，创建新的 BFC 可以避免此问题。
 
+```html
+<style>
+section {
+  overflow: hidden;
+  border: 1px solid blue;
+  width: 100%;
+}
 
+div {
+  margin: 5px;
+  width: 50px;
+  height: 150px;
+}
+
+.left {
+  float: left;
+  background: pink;
+}
+
+.next {
+  width:50px;
+  height: 50px;
+  background: cyan;
+}
+</style>
+<section>
+  <div class="left">1</div>
+  <div class="left">2</div>
+  <p>many content</p>
+</section>
+<div class="next"></div>
+```
 
 ## 原型链
 
