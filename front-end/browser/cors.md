@@ -157,6 +157,25 @@ Content-Type: text/plain
 [Some GZIP'd payload]
 ```
 
+## 解决跨域
+
+* JSONP: 利用<srcipt>标签通过Get去请求脚本，返回`callback(json)`形式的响应后，脚本执行便会触发callback函数
+* 响应的header中设置`Access-Control-Allow-Origin`
+* postMessage: 
+```js
+// 发送消息端
+window.parent.postMessage('message', 'http://test.com')
+// 接收消息端
+var mc = new MessageChannel()
+mc.addEventListener('message', event => {
+  var origin = event.origin || event.originalEvent.origin
+  if (origin === 'http://test.com') {
+    console.log('验证通过')
+  }
+})
+```
+* document.domain: 设置为相同的二级域名，便可实现跨域。部分浏览器已废弃，不推荐
+
 ## 链接
 
 [查看详情](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)

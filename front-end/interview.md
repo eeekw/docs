@@ -441,7 +441,10 @@ function deepClone(obj) {
 * 不能用作构造函数
 * 不能在body里使用yield
 
+## this指向
 
+普通函数：this指向调用此函数的对象
+箭头函数：没有自己的this，this是其所在作用域内的this
 
 ## 原型链
 
