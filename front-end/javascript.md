@@ -47,6 +47,18 @@
    this.setState(partialState);
    ```
 
+## 比较
+
+* ==: 会进行类型转换且`NaN != NaN` `-0 == +0`
+* ===: 不会进行类型转换，与==一样`NaN`, `-0`, `+0`有特殊处理（`NaN != NaN` `-0 == +0`）
+* Object.is(): 不会进行类型转换且对`NaN`, `-0`, `+0`没有特殊处理
+  ```js
+  Object.is(0, -0);            // false
+  Object.is(0n, -0n);          // true
+  Object.is(-0, -0);           // true
+  Object.is(NaN, 0/0);         // true
+  ```
+
 ## 防抖
 
 在一段时间内不断触发事件，只执行最后一次
@@ -207,3 +219,31 @@ function flatten(arr) {
 * 把小数变换成整数后计算
 * String.prototype.toFixed()
 
+## 使对象不可变
+
+`Object.preventExtensions()`: 不可添加新属性
+`Object.seal()`: 不可添加新属性，不可删除，已有属性不可配置
+`Object.freeze()`: 不可添加新属性，不可删除，已有属性不可变，不可改变可枚举，可配置、可写属性
+
+## MutationObserver
+
+监听DOM树的变化
+
+## Proxy 和 Reflect
+
+允许拦截某些操作并实现自定义行为
+
+可拦截的行为：
+* handler.apply()
+* handler.construct()
+* handler.defineProperty()
+* handler.deleteProperty()
+* handler.get()
+* handler.getOwnPropertyDescriptor()
+* handler.getPrototypeOf()
+* handler.has()
+* handler.isExtensible()
+* handler.ownKeys()
+* handler.preventExtensions()
+* handler.set()
+* handler.setPrototypeOf()
