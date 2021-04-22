@@ -26,18 +26,7 @@ compilation.hooks.renderManifest.tap(
 			outputOptions
 		);
 		if (hotUpdateChunk) {
-			render = () =>
-				this.renderChunk(
-					{
-						chunk,
-						dependencyTemplates,
-						runtimeTemplate,
-						moduleGraph,
-						chunkGraph,
-						codeGenerationResults
-					},
-					hooks
-				);
+			// ...
 		} else if (chunk.hasRuntime()) {
 			render = () =>
 				this.renderMain(
@@ -95,15 +84,19 @@ compilation.hooks.renderManifest.tap(
 );
 ```
 
-## 生成入口chunk的结果
+## renderMain
 
+生成入口chunk的结果
 ```js
 renderMain(renderContext, hooks, compilation) {
 	const { chunk, chunkGraph, runtimeTemplate } = renderContext;
+  // 运行时必须的代码
 	const runtimeRequirements = chunkGraph.getTreeRuntimeRequirements(chunk);
+  // 是否需要添加立即执行函数包裹代码
 	const iife = runtimeTemplate.isIIFE();
+  // 返回webpack模块间的引入导出逻辑代码
 	const bootstrap = this.renderBootstrap(renderContext, hooks);
-	const useSourceMap = hooks.useSourceMap.call(chunk, renderContext);
+  // 获取chunk中的modules
 	const allModules = Array.from(
 		chunkGraph.getOrderedChunkModulesIterableBySourceType(
 			chunk,
@@ -111,12 +104,10 @@ renderMain(renderContext, hooks, compilation) {
 			compareModulesByIdentifier
 		) || []
 	);
-	let inlinedModules;
-	if (bootstrap.allowInlineStartup) {
-		inlinedModules = new Set(chunkGraph.getChunkEntryModulesIterable(chunk));
-	}
+  // source对象用于保存代码
 	let source = new ConcatSource();
 	let prefix;
+  // 添加立即执行函数包裹
 	if (iife) {
 		if (runtimeTemplate.vsupportsArrowFunction()) {
 			source.add("/******/ (() => { // webpackBootstrap\n");
@@ -127,19 +118,9 @@ renderMain(renderContext, hooks, compilation) {
 	} else {
 		prefix = "/******/ ";
 	}
-	let allStrict = false;
-	if (allModules.every(m => m.buildInfo.strict)) {
-		const strictBailout = hooks.strictRuntimeBailout.call(renderContext);
-		if (strictBailout) {
-			source.add(
-				prefix +
-					`// runtime can't be in strict mode because ${strictBailout}.\n`
-			);
-		} else {
-			allStrict = true;
-			source.add(prefix + '"use strict";\n');
-		}
-	}
+  // 返回chunk的代码
+  // 首先Template.renderChunkModules会遍历modules，调用renderModule方法并传入module，返回所有module经处理的source对象。然后心module的id为key，module代码为value生成对象
+  // renderModule: 从codeGenerationResults取出module的source对象，然后使用函数进行包裹，并传入module, require, export等参数，返回新的source对象
 	const chunkModules = Template.renderChunkModules(
 		renderContext,
 		inlinedModules
@@ -345,4 +326,35 @@ renderMain(renderContext, hooks, compilation) {
 	chunk.rendered = true;
 	return iife ? new ConcatSource(finalSource, ";") : finalSource;
 }
+```
+
+## renderChunk
+
+非runtime chunk执行以下方法
+注释见renderMain，renderMain在此基础上还需要添加runtime相关代码
+```js
+renderChunk(renderContext, hooks) {
+		const { chunk, chunkGraph } = renderContext;
+		const modules = chunkGraph.getOrderedChunkModulesIterableBySourceType(
+			chunk,
+			"javascript",
+			compareModulesByIdentifier
+		);
+		const moduleSources =
+			Template.renderChunkModules(
+				renderContext,
+				modules ? Array.from(modules) : [],
+				module => this.renderModule(module, renderContext, hooks, true)
+			) || new RawSource("{}");
+		let source = tryRunOrWebpackError(
+			() => hooks.renderChunk.call(moduleSources, renderContext),
+			"JavascriptModulesPlugin.getCompilationHooks().renderChunk"
+		);
+		source = tryRunOrWebpackError(
+			() => hooks.render.call(source, renderContext),
+			"JavascriptModulesPlugin.getCompilationHooks().render"
+		);
+		chunk.rendered = true;
+		return new ConcatSource(source, ";");
+	}
 ```

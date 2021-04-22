@@ -26,6 +26,7 @@ importStatement({
 			chunkGraph.moduleGraph,
 			originModule.buildMeta.strictHarmonyModule
 		);
+    // 添加运行时需要全局注入的函数、对象等
 		runtimeRequirements.add(RuntimeGlobals.require);
 		const importContent = `/* harmony import */ ${optDeclaration}${importVar} = __webpack_require__(${moduleId});\n`;
 
