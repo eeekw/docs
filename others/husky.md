@@ -1,4 +1,4 @@
 # husky
 
-![husky/Untitled.png](../.gitbook/assets/husky.png)
+![husky.png](../.gitbook/assets/husky.png)
 
