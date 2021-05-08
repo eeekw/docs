@@ -37,6 +37,8 @@ git remote prune origin
 git branch -r -d origin/<branch>
 ### 批量删除分支
 git branch |grep '分支过滤关键字' |xargs git branch -D
+### 交互式暂存
+git add -p <file>
 ```
 
 ## 子模块
