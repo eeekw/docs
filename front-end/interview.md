@@ -199,7 +199,7 @@ vue并不能检测到通过索引设置值和直接修改数组长度，但是vu
 
 
 
-### compose
+## compose
 
 ```js
 export default function compose(...funcs) {
@@ -614,3 +614,156 @@ function flatten(arr) {
 }
 ```
 
+## 加千分号
+
+x(?=y)　向前断言：只有当x后面是y时才匹配x
+(?<=y)x　向后断言：只有当x前端是y时才匹配x
+```js
+'1234567890'.replace(/\d{1,3}(?=(\d{3})+$)/g, '$&,')
+```
+
+[正则表达式](http://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#creating_a_regular_expression)
+
+## 实现useOnClickOutside
+
+```js
+const useOnClickOutside = (ref, handler) => {
+  useEffect(() => {
+    const listener = (event) => {
+      // Do nothing if clicking ref's element or descendent elements
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      handler(event);
+    };
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, handler])
+}
+```
+(useOnClickOutside)[https://usehooks.com/useOnClickOutside/]
+
+## 立即执行函数
+
+```js
+var a = 1
+(function a(){
+  a = 2
+  console.log(a)
+})()
+
+```
+
+## 实现私有属性
+
+```js
+var C = function() {
+  const s = Symbol()
+
+  return function C() {
+    this[s] = 'private property'
+  }
+}()
+```
+
+## 实现let, const
+
+```js
+// let声明的变量是块级作用域，var是函数作用域
+for(var i = 0; i < 10; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 0)
+}
+
+for(var i = 0; i < 10; i++) {
+  (function() {
+    setTimeout(() => {
+      console.log(i)
+    }, 0)
+  })(i)
+}
+
+// const 可通过作为window或对象的属性来模拟
+// babel实现： 在编译时对const声明的变量的赋值操作添加抛出异常代码
+Object.defineProperty(window, name, {
+  enumerable: false,
+  configurable: false,
+  get: function () {
+    return value
+  },
+  set: function (data) {
+    // 赋值时报错
+    throw new TypeError("\"" + name + "\" is read-only")
+  }
+})
+```
+
+## react 兄弟组件如何通信，不使用状态管理工具的情况下
+
+把状态提升到共同的父组件，父组件管理状态且修改状态的方法，通过属性传递状态与方法到子组件
+
+[状态提升](https://zh-hans.reactjs.org/docs/lifting-state-up.html)
+
+## react 生命周期的调用时机
+
+### 挂载
+
+* constructor()
+* static getDerivedStateFromProps()
+* render()
+* 更新 ­D­O­M and refs
+* componentDidMount()
+
+### 更新
+
+* static getDerivedStateFromProps()
+* shouldComponentUpdate()
+* render()
+* getSnapshotBeforeUpdate()
+* 更新 ­D­O­M and refs
+* componentDidUpdate()
+
+### 卸载
+
+* componentWillUnmount()
+
+[组件的生命周期](https://zh-hans.reactjs.org/docs/react-component.html)
+[生命周期图表](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+## setState
+
+在react的事件处理函数内部的 setState 是异步的（包括生命周期，由react触发），多个setState()调用会进行批处理。
+
+### 如何在调用setState()后读取更新后的值
+
+使用componentDidUpdate或setState的回调函数（setState(updater, callback)）
+
+### 如何连续更改state
+
+```js
+incrementCount() {
+  this.setState((state) => {
+    // 重要：在更新的时候读取 `state`，而不是 `this.state`。
+    return {count: state.count + 1}
+  });
+}
+
+handleSomething() {
+  // 假设 `this.state.count` 从 0 开始。
+  this.incrementCount();
+  this.incrementCount();
+  this.incrementCount();
+
+  // 如果你现在在这里读取 `this.state.count`，它还是会为 0。
+  // 但是，当 React 重新渲染该组件时，它会变为 3。
+}
+
+```
+
+[setState()](https://zh-hans.reactjs.org/docs/react-component.html#setstate)
+[深入学习：何时以及为什么 setState() 会批量执行？](https://stackoverflow.com/questions/48563650/does-react-keep-the-order-for-state-updates/48610973#48610973)
