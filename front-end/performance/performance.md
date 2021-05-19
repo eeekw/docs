@@ -164,6 +164,7 @@ WebKit和Firefox做了优化。当执行脚本时，其它线程解析剩余的�
 18. 使favicon.ico小且可缓存
 
 ## 渲染层
+
 将容易触发重绘重排的元素提升为渲染层，从而不会影响其它元素
 以下属性会导致元素提升为渲染层
 * 3D transforms(transform: translateZ(), rotate3d(), 等)，
