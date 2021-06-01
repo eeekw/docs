@@ -56,6 +56,7 @@ setTimeout(()=>{
 
 1. 为什么需要虚拟Dom
 2. 兄弟组件如何通信
+   1. 什么是状态提升
 3. 绑定属性key有什么用
 
 ### vue
@@ -68,13 +69,21 @@ setTimeout(()=>{
 
 ### react
 
-1. setState是同步还是异步的
-2. react如何优化性能
-3. 怎么理解高阶组件
+1. react的请求会放在哪个生命周期里
+2. setState是同步还是异步的
+3. react如何优化性能
+   1. shouldComponentUpdate的作用
+4. 怎么理解高阶组件
+5. 怎么理解useEffect
+6. redux, react-redux是如何工作的
 
 ### vue-router
 
 1. vue-router是如何实现前端路由的
+
+## webpack
+
+1. 各个配置项的意义
 
 ## 浏览器
 
